@@ -4,7 +4,7 @@ import tailwind from "tailwind-rn";
 
 import AddBtn from "../components/AddBtn";
 
-const Cards = () => {
+const Notes = () => {
   return (
     <SafeAreaView style={tailwind("h-full")}>
       <View style={tailwind("pt-12 items-center")}>
@@ -24,4 +24,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default Notes;

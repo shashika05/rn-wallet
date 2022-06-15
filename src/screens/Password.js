@@ -4,7 +4,7 @@ import tailwind from "tailwind-rn";
 
 import AddBtn from "../components/AddBtn";
 
-const Cards = () => {
+const Password = () => {
   return (
     <SafeAreaView style={tailwind("h-full")}>
       <View style={tailwind("pt-12 items-center")}>
@@ -15,7 +15,7 @@ const Cards = () => {
               { fontFamily: "Kanit-600" })
             }
           >
-            Card Screen
+            Password Screen
           </Text>
         </View>
       </View>
@@ -24,4 +24,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default Password;

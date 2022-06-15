@@ -5,9 +5,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Octicons, FontAwesome5 } from "@expo/vector-icons";
 
 import { useFonts } from "expo-font";
+// import tailwind from "tailwind-rn";
 
+// Screens
 import Cards from "./src/screens/Cards";
-import tailwind from "tailwind-rn";
+import Password from "./src/screens/Password";
+import Notes from "./src/screens/Notes";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,10 +40,17 @@ export default function App() {
         <Tab.Screen
           name="Cards"
           options={{
-            tabBarIcon: () => {
-              return <AntDesign name="creditcard" size={28} color="black" />;
+            tabBarIcon: ({ focused }) => {
+              return (
+                <AntDesign
+                  name="creditcard"
+                  size={34}
+                  color={!focused ? "black" : "#3b82f6"}
+                />
+              );
             },
             tabBarBadge: 3,
+            tabBarShowLabel: false,
             tabBarBadgeStyle: {
               fontFamily: "Kanit-400",
               fontSize: 12,
@@ -60,10 +70,17 @@ export default function App() {
         <Tab.Screen
           name="Passwords"
           options={{
-            tabBarIcon: () => {
-              return <Octicons name="key-asterisk" size={24} color="black" />;
+            tabBarIcon: ({ focused }) => {
+              return (
+                <Octicons
+                  name="key-asterisk"
+                  size={28}
+                  color={!focused ? "black" : "#3b82f6"}
+                />
+              );
             },
             tabBarBadge: 3,
+            tabBarShowLabel: false,
             tabBarBadgeStyle: {
               fontFamily: "Kanit-400",
               fontSize: 12,
@@ -78,17 +95,23 @@ export default function App() {
               fontFamily: "Kanit-500",
             },
           }}
-          component={Cards}
+          component={Password}
         />
         <Tab.Screen
           name="Notes"
           options={{
-            tabBarIcon: () => {
+            tabBarIcon: ({ focused }) => {
               return (
-                <FontAwesome5 name="sticky-note" size={24} color="black" />
+                <FontAwesome5
+                  name="sticky-note"
+                  size={28}
+                  color={!focused ? "black" : "#3b82f6"}
+                />
               );
             },
             tabBarBadge: 3,
+            tabBarInactiveTintColor: "red",
+            tabBarShowLabel: false,
             tabBarBadgeStyle: {
               fontFamily: "Kanit-400",
               fontSize: 12,
@@ -103,7 +126,7 @@ export default function App() {
               fontFamily: "Kanit-500",
             },
           }}
-          component={Cards}
+          component={Notes}
         />
       </Tab.Navigator>
       <StatusBar style="auto" />
