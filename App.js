@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import * as React from "react";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Octicons, FontAwesome5 } from "@expo/vector-icons";
@@ -15,6 +15,10 @@ import Notes from "./src/screens/Notes";
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [notesCount, setNotesCount] = useState(0);
+  const [passCount, setPassCount] = useState(0);
+  const [cardsCount, setCardsCount] = useState(0);
+
   let [loaded] = useFonts({
     "Kanit-300": require("./src/fonts/Kanit-300.ttf"),
     "Kanit-300i": require("./src/fonts/Kanit-300i.ttf"),
@@ -38,19 +42,21 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
-          name="Cards"
+          name="Notes"
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <AntDesign
-                  name="creditcard"
-                  size={34}
+                <FontAwesome5
+                  name="sticky-note"
+                  size={30}
                   color={!focused ? "black" : "#3b82f6"}
                 />
               );
             },
-            tabBarBadge: 3,
+            tabBarBadge: notesCount,
+            tabBarInactiveTintColor: "red",
             tabBarShowLabel: false,
+
             tabBarBadgeStyle: {
               fontFamily: "Kanit-400",
               fontSize: 12,
@@ -65,7 +71,9 @@ export default function App() {
               fontFamily: "Kanit-500",
             },
           }}
-          component={Cards}
+          children={() => (
+            <Notes setNotesCount={setNotesCount} notesCount={notesCount} />
+          )}
         />
         <Tab.Screen
           name="Passwords"
@@ -95,22 +103,24 @@ export default function App() {
               fontFamily: "Kanit-500",
             },
           }}
-          component={Password}
+          children={() => (
+            <Password setPassCount={setPassCount} passCount={passCount} />
+          )}
         />
+
         <Tab.Screen
-          name="Notes"
+          name="Cards"
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <FontAwesome5
-                  name="sticky-note"
-                  size={28}
+                <AntDesign
+                  name="creditcard"
+                  size={34}
                   color={!focused ? "black" : "#3b82f6"}
                 />
               );
             },
             tabBarBadge: 3,
-            tabBarInactiveTintColor: "red",
             tabBarShowLabel: false,
             tabBarBadgeStyle: {
               fontFamily: "Kanit-400",
@@ -126,7 +136,9 @@ export default function App() {
               fontFamily: "Kanit-500",
             },
           }}
-          component={Notes}
+          children={() => (
+            <Cards setCardsCount={setCardsCount} cardsCount={cardsCount} />
+          )}
         />
       </Tab.Navigator>
       <StatusBar style="auto" />
